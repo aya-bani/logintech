@@ -57,4 +57,57 @@ export const roomAPI = {
   },
 };
 
+// Device-related API calls
+export const deviceAPI = {
+  // Get all devices
+  getAllDevices: async () => {
+    try {
+      const response = await api.get('/devices');
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching devices:', error);
+      throw error;
+    }
+  },
+
+  // Get device statistics
+  getDeviceStats: async () => {
+    try {
+      const response = await api.get('/devices/stats');
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching device stats:', error);
+      throw error;
+    }
+  },
+};
+
+// Alerts API calls
+export const alertAPI = {
+  // Get all alerts
+  getAllAlerts: async () => {
+    try {
+      const response = await api.get('/alerts');
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching alerts:', error);
+      throw error;
+    }
+  },
+};
+
+// Location API calls
+export const locationAPI = {
+  // Get all locations
+  getAllLocations: async () => {
+    try {
+      const response = await api.get('/locations');
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching locations:', error);
+      throw error;
+    }
+  },
+};
+
 export default api;

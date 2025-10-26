@@ -1,9 +1,9 @@
 import './App.css'
-import RoomsDashboard from './components/RoomsDashboard'
+import SystemSummary from './components/SystemSummary'
 
 function App() {
   return (
-    <RoomsDashboard />
+    <SystemSummary />
   )
 }
 
