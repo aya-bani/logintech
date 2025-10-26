@@ -1,16 +1,97 @@
-# React + Vite
+# AV Monitoring Dashboard - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React-based dashboard for monitoring Logitech Sync room data and device status.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Real-time Room Monitoring**: Displays room availability and status
+- **Room Statistics**: Shows availability percentage and counts
+- **Device Management**: View devices in each room with their status
+- **Auto-refresh**: Updates every 30 seconds
+- **Responsive Design**: Works on desktop and mobile devices
 
-## React Compiler
+## Components
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### RoomsDashboard
+Main dashboard component that orchestrates all other components and handles data fetching.
 
-## Expanding the ESLint configuration
+### RoomStatsCard
+Displays room availability statistics including:
+- Total rooms count
+- Available rooms count
+- Occupied rooms count
+- Availability percentage with progress bar
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### RoomsList
+Shows a list of all rooms with:
+- Room name and location
+- Availability status (available/occupied)
+- Device count
+- Last activity timestamp
+- Click to view room details
+
+### RoomDetail
+Detailed view of a single room showing:
+- Room information
+- Device list with status
+- Device types (camera, display, etc.)
+- Last activity information
+
+## API Integration
+
+The dashboard connects to the backend API at `http://localhost:5000/api` with these endpoints:
+
+- `GET /api/rooms` - Get all rooms
+- `GET /api/rooms/stats` - Get room statistics
+- `GET /api/rooms/:roomId` - Get single room details
+- `GET /api/rooms/:roomId/activity` - Get room activity
+
+## Getting Started
+
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+2. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+3. Make sure your backend is running on `http://localhost:5000`
+
+## Tech Stack
+
+- React 19 with functional components and hooks
+- Axios for API communication
+- Tailwind CSS for styling
+- Vite for build tooling
+
+## Data Structure
+
+The dashboard expects the following data structure from the backend:
+
+```javascript
+// Room stats
+{
+  total: 30,
+  available: 20,
+  unavailable: 10,
+  percentage: 70
+}
+
+// Room list
+{
+  data: [
+    {
+      id: "room-123",
+      name: "Conference Room A",
+      location: "Melbourne, AUS",
+      status: "available",
+      deviceCount: 5,
+      lastActivity: "2024-01-20T10:30:00Z",
+      devices: [...]
+    }
+  ]
+}
+```
